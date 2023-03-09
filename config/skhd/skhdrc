@@ -1,0 +1,67 @@
+# Labeled spaces
+alt - 1     : yabai -m space --focus "kitty"
+alt - 2     : yabai -m space --focus "brave"
+alt - 3     : yabai -m space --focus "firefox"
+alt - 4     : yabai -m space --focus "outlook"
+alt - 5     : yabai -m space --focus "slack"
+alt - 6     : yabai -m space --focus "fantastical"
+alt - 7     : yabai -m space --focus "spotify"
+alt - 8     : yabai -m space --focus "linear"
+alt - 9     : yabai -m space --focus "zoom"
+alt - 0     : yabai -m space --focus "safari"
+
+# Force window arrangement
+alt - m     : yabai -m space --layout bsp && yabai -m space --balance
+
+# Navigation
+alt - h       : yabai -m window --focus west
+alt - j       : yabai -m window --focus south
+alt - k       : yabai -m window --focus north
+alt - l       : yabai -m window --focus east
+
+# Moving Windows
+shift + alt - h : yabai -m window --warp west
+shift + alt - j : yabai -m window --warp south
+shift + alt - k : yabai -m window --warp north
+shift + alt - l : yabai -m window --warp east
+
+# Move focus container to workspace
+shift + alt - m : yabai -m window --space last; yabai -m space --focus last
+shift + alt - p : yabai -m window --space prev; yabai -m space --focus prev
+shift + alt - n : yabai -m window --space next; yabai -m space --focus next
+
+# Stack current window on top of the one on top.
+alt - s : \
+    yabai -m window --focus north; \
+    yabai -m window --focus south; \
+    yabai -m window --stack prev
+
+# Float / Unfloat Window
+shift + alt - space : \
+    yabai -m window --toggle float; \
+    yabai -m window --toggle border
+
+# Restart Yabai and Skhd
+shift + lctrl + alt - r : \
+    /usr/bin/env osascript <<< \
+        'display notification "Restarting yabai and skhd" with title "Personal"'; \
+    /usr/bin/env brew services restart yabai && \
+    /usr/bin/env brew services restart skhd && \
+    /usr/bin/env osascript <<< \
+        'display notification "Done" with title "Personal"'
+
+# Make window native fullscreen
+alt - f         : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+
+# Open sessionizer
+shift + lctrl - g : { source $HOME/Projects/Personal/dotfiles/.bashrc; popup.sh "gpt.sh" }
+shift + lctrl - p : { source $HOME/Projects/Personal/dotfiles/.bashrc; popup.sh "tmux-sessions.sh" }
+alt - w  : { source $HOME/Projects/Personal/dotfiles/.bashrc; sessionizer sessions next }
+alt - b  : { source $HOME/Projects/Personal/dotfiles/.bashrc; sessionizer sessions prev }
+shift + alt - w : tmux switch-client -n
+shift + alt - b : tmux switch-client -p
+
+f1 : tmux select-window -t 1
+f2 : tmux select-window -t 2
+f3 : tmux select-window -t 3

@@ -1,0 +1,14 @@
+---
+- name: Clone repositories
+  hosts: localhost
+  connection: local
+  vars_files:
+    - '{{ root }}/requirements.yml'
+  tasks:
+    - name: Clone repositories
+      git:
+        repo: 'https://github.com/{{ item }}'
+        dest: '{{ root }}/repos/{{ item }}'
+        clone: yes
+        update: yes
+      loop: '{{ repos }}'
